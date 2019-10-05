@@ -1,35 +1,30 @@
 <div class='main-nav'>
     <div class='navbar navbar-inverse'>
-        <div class='navbar-header'>
+        <div class='navbar-header' style="height: 10rem">
             <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse' [attr.aria-expanded]='isExpanded' (click)='toggle()'>
                 <span class='sr-only'>Toggle navigation</span>
                 <span class='icon-bar'></span>
                 <span class='icon-bar'></span>
                 <span class='icon-bar'></span>
             </button>
-            <a class='navbar-brand' [routerLink]='["/"]'>entityFrameworkCodeFirst</a>
+            <a class='navbar-brand' [routerLink]='["/"]'>Self Travel Agent</a>
         </div>
         <div class='clearfix'></div>
         <div class='navbar-collapse collapse' [ngClass]='{ "in": isExpanded }'>
             <ul class='nav navbar-nav'>
                 <li [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
                     <a [routerLink]='["/"]' (click)='collapse()'>
-                        <span class='glyphicon glyphicon-home'></span> Home
+                        <i class="fa fa-home"></i>
+                        Home
                     </a>
                 </li>
                 <li [routerLinkActive]='["link-active"]'>
                     <a [routerLink]='["/counter"]' (click)='collapse()'>
-                        <span class='glyphicon glyphicon-education'></span> Counter
-                    </a>
-                </li>
-                <li [routerLinkActive]='["link-active"]'>
-                    <a [routerLink]='["/fetch-data"]' (click)='collapse()'>
-                        <span class='glyphicon glyphicon-th-list'></span> Fetch data
+                        <i class="fa fa-suitcase"></i>
+                        My Trips
                     </a>
                 </li>
             </ul>
-          <i class="fa fa-bath" aria-hidden="true"></i>
-
         </div>
     </div>
 </div>

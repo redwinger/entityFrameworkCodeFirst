@@ -1,0 +1,64 @@
+.STA-trip-item:nth-child(odd) {
+    background: grey;
+    padding: 1.5em 1em;
+}
+
+.STA-trip-item:nth-child(even) {
+    background: lightgrey;
+    padding: 1.5em 1em;
+}
+
+.STA-button-row {
+    margin-bottom: 1em;
+}
+
+.STA-trip-item-detail{
+    font-weight: bold;
+}
+
+.trips-header {
+    text-align: center;
+    font-weight: bolder;
+    line-height: .6;
+}
+
+.STA-button-override {
+    margin-top: -1.5em;
+    margin-bottom: -1.5em;
+}
+
+.STA-brown-out {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.40)
+}
+
+.STA-confirm-card {
+    z-index: 10000;
+    top: 35%;
+    position: fixed;
+    background: white;
+    border: 1px solid black;
+}
+
+.STA-confirm-delete-text {
+    font-weight: bold;
+    text-align: center;
+}
+
+.STA-confirm-delete-btn {
+    width: 98%;
+    padding: .5em 1em;
+}
+
+.STA-form-row{
+    margin-bottom:2em;
+}
+
+STA-form{
+    margin-left: -11em;
+}

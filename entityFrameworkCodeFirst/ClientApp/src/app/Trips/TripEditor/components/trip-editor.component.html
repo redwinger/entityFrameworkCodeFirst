@@ -1,0 +1,181 @@
+<loader [isLoading]="getIsLoading()"></loader>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="trips-header" *ngIf="getIsTripSelected()">
+            <input type="text" [(ngModel)]="this.manager.selectedTrip.name" />
+        </h1>
+    </div>
+    <div class="row STA-button-row">
+        <div class="col-md-12">
+            <button class="btn btn-outline-primary" (click)="onBack()">
+                <i class="fa fa-backward"></i>
+                Back
+            </button>
+            <button class="btn btn-primary pull-right" style="margin-left: .5em;" (click)="onAddItem()">
+                <i class="fa fa-plus"></i>
+                Add Item
+            </button>
+            <button class="btn btn-danger pull-right" (click)="onEnableDelete()">
+                <i class="fa fa-trash"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="row STA-trip-item">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2">
+            <div class="STA-trip-item-detail">
+                Name
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="STA-trip-item-detail">
+                Notes
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="STA-trip-item-detail">
+                Address
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="STA-trip-item-detail">
+                Your Cost
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="STA-trip-item-detail">
+                Local Cost
+            </div>
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+
+    <div class="row STA-trip-item" *ngFor="let item of getTripItems()">
+        <div class="col-md-1">
+            <button class="btn btn-info STA-button-override" [disabled]="getIsCurrentMode(40)" (click)="onSelectItem(item)">
+                <i class="fa fa-edit"></i>
+            </button>
+        </div>
+        <div class="col-md-2">
+            <div class="STA-trip-item-detail">
+                {{getItemName(item)}}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="STA-trip-item-detail">
+                {{getItemNotes(item)}}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="STA-trip-item-detail" (click)="onAddressNav(getItemAddress(item))" style="cursor: pointer;">
+                {{getItemAddress(item)}}
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="STA-trip-item-detail">
+                {{getItemCost(item)}}
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="STA-trip-item-detail">
+                {{getItemLocalCost(item)}}
+            </div>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-danger STA-button-override" [hidden]="!getIsCurrentMode(40)" (click)="onBeginDeleteItem(item)">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<div class="row" *ngIf="getIsCreateOrEdit()" style="margin-left: -11em;">
+    <div class="col-md-10 STA-confirm-card STA-trip-item">
+        <div class="row STA-form-row">
+            <div class="col-sm-6">
+                <div class="STA-trip-item-detail">
+                    <input type="text" [(ngModel)]="selectedItem.name" placeholder="Name" class="form-control" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="STA-trip-item-detail">
+                    <input type="text" [(ngModel)]="selectedItem.address" placeholder="Address" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row STA-form-row">
+            <div class="col-sm-6">
+                <div class="STA-trip-item-detail">
+                    <input type="text" [(ngModel)]="selectedItem.notes" placeholder="Notes" class="form-control" />
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="STA-trip-item-detail">
+                    <input type="number" [(ngModel)]="selectedItem.cost" class="form-control" />
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="STA-trip-item-detail">
+                    <input type="number" [(ngModel)]="selectedItem.localCost" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row STA-form-row">
+            <div class="col-sm-12">
+                <button [hidden]="!getIsCurrentMode(21)" class="btn btn-success pull-right" (click)="onCreateItem()" style="margin-left: 1em;">
+                    <i class="fa fa-plus"></i>
+                    Create Item
+                </button>
+                <button [hidden]="!getIsCurrentMode(50)" class="btn btn-success pull-right" (click)="onSaveChanges()" style="margin-left: 1em;">
+                    <i class="fa fa-floppy-o"></i>
+                    Save Changes
+                </button>
+                <button class="btn btn-outline-danger pull-right" (click)="onCancelChanges()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="STA-brown-out"></div>
+</div>
+
+<!-- Delete confirm card -->
+<div class="row" [hidden]="!getIsCurrentMode(41)">
+    <div class="col-md-4 offset-2 STA-confirm-card">
+        <div class="card-header STA-confirm-delete-text">
+            Self Travel Agent
+            <i class="fa fa-times pull-right" (click)="onCancelDelete()"></i>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-12 STA-confirm-delete-text">
+                            Are you sure you want to delete {{getSelectedItemName()}}?
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <button class="btn-outline-primary btn STA-confirm-delete-btn" (click)="onCancelDelete()">
+                                Cancel
+                            </button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-danger STA-confirm-delete-btn" (click)="onConfirmDeleteItem()">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="STA-brown-out">
+    </div>
+</div>
+

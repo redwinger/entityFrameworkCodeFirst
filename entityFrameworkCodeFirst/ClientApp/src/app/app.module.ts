@@ -6,29 +6,34 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { TripManager } from './Trips/TripManagement/components/trip-manager.component';
+import { TripEditor } from './Trips/TripEditor/components/trip-editor.component';
+import { TripService } from './api/trip-service';
+import { HttpModule } from '@angular/http';
+import { LoaderComponent } from './Trips/Common/components/loader/loader.component';
+
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent
-  ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
-    FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-    ])
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        NavMenuComponent,
+        TripManager,
+        TripEditor,
+        LoaderComponent
+    ],
+    imports: [
+        BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+        HttpClientModule,
+        FormsModule,
+        HttpModule,
+        RouterModule.forRoot([
+            { path: '', component: TripManager, pathMatch: 'full' },
+
+        ])
+    ],
+    providers: [
+        TripService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+.btn {
+    cursor: pointer;
+}
+
+
+.btn-outline-primary {
+    border: 1px solid #007bff !important;
+}
+
+.btn-outline-primary:hover{
+    color: white !important;
+}
+
+.btn-info{
+   color: black !important;
+}
